@@ -69,7 +69,7 @@ placeholders. This is the full list of that correction:
 | Colorado | Deion Sanders | Yes | Yes |
 | Iowa | Kirk Ferentz | Yes | Yes |
 | Miami | Mario Cristobal | Yes | Yes |
-| North Carolina | Bill Belichick | Yes | Not yet researched |
+| North Carolina | Bill Belichick | Yes | Correcting in next build |
 | North Texas | Neal Brown | No — no shipped likeness, name only | Yes |
 | Southern Miss | Blake Anderson | Yes | Yes |
 | Utah State | Bronco Mendenhall | Yes | Yes |
