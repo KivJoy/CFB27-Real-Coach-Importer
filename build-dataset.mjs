@@ -44,12 +44,17 @@ function main() {
     .map(([team, v]) => {
       const stat = statByName.get(normName(`${v.firstName} ${v.lastName}`));
       if (!stat) unmatched.push(`${v.firstName} ${v.lastName} (${team})`);
+      // age/seasonsWithTeam live on the Coach record itself (not CareerCoachStats),
+      // so they're pulled out of the stat blob rather than spread into `stats`.
+      const { age, seasonsWithTeam, ...careerStats } = stat || {};
       return {
         team,
         firstName: v.firstName,
         lastName: v.lastName,
         asset: v.asset || null,
-        stats: stat ? { ...stat } : null,
+        age: stat && age != null ? age : null,
+        seasonsWithTeam: stat && seasonsWithTeam != null ? seasonsWithTeam : null,
+        stats: stat ? careerStats : null,
         source: stat ? statsSrc._source : null,
         approx: stat ? ['overall COLLEGE career HC W-L through 2025 season (July 2026), the era CFB27 reflects'] : null,
       };

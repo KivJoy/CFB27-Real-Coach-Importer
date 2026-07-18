@@ -12,6 +12,8 @@
         "portrait": 846,
         "isNIL": true
       },
+      "age": 59,
+      "seasonsWithTeam": 3,
       "stats": {
         "wins": 16,
         "losses": 21
@@ -31,6 +33,8 @@
         "portrait": 645,
         "isNIL": true
       },
+      "age": 71,
+      "seasonsWithTeam": 27,
       "stats": {
         "wins": 213,
         "losses": 128
@@ -50,6 +54,8 @@
         "portrait": 610,
         "isNIL": true
       },
+      "age": 55,
+      "seasonsWithTeam": 4,
       "stats": {
         "wins": 97,
         "losses": 79
@@ -69,6 +75,8 @@
         "portrait": 563,
         "isNIL": true
       },
+      "age": 74,
+      "seasonsWithTeam": 1,
       "stats": {
         "wins": 4,
         "losses": 8
@@ -83,6 +91,8 @@
       "firstName": "Neal",
       "lastName": "Brown",
       "asset": null,
+      "age": 46,
+      "seasonsWithTeam": 0,
       "stats": {
         "wins": 72,
         "losses": 51
@@ -102,6 +112,8 @@
         "portrait": 536,
         "isNIL": true
       },
+      "age": 57,
+      "seasonsWithTeam": 0,
       "stats": {
         "wins": 74,
         "losses": 54,
@@ -122,6 +134,8 @@
         "portrait": 775,
         "isNIL": true
       },
+      "age": 60,
+      "seasonsWithTeam": 1,
       "stats": {
         "wins": 146,
         "losses": 95

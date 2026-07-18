@@ -1,13 +1,13 @@
 {
-  "_note": "Real-life head-coaching career records for the coaches this tool imports (the generic placeholders EA ships — see GENERIC_FILLS in build-dataset.mjs). Keyed by coach name (First Last). wins/losses are OVERALL COLLEGE career HC record from Wikipedia's 'List of current NCAA Division I FBS football coaches', current through the 2025 season (July 2026) — the era CFB27 reflects. Note: the game's coach-stats field tracks COLLEGE coaching only, so Bill Belichick's record here is his UNC college record (4-8), not his NFL career. Absent fields are left unwritten (the coach keeps EA's value), never fabricated.",
+  "_note": "Real-life head-coaching career records for the coaches this tool imports (the generic placeholders EA ships — see GENERIC_FILLS in build-dataset.mjs). Keyed by coach name (First Last). wins/losses are OVERALL COLLEGE career HC record from Wikipedia's 'List of current NCAA Division I FBS football coaches', current through the 2025 season (July 2026) — the era CFB27 reflects. Note: the game's coach-stats field tracks COLLEGE coaching only, so Bill Belichick's record here is his UNC college record (4-8), not his NFL career. age is the coach's real age entering the 2026 season (birthdate vs. ~Aug 2026 kickoff); seasonsWithTeam is real completed seasons AT THIS SCHOOL through 2025 (0 for a coach hired after the 2025 season, i.e. whose first season is 2026). Absent fields are left unwritten (the coach keeps EA's value), never fabricated.",
   "_source": "https://en.wikipedia.org/wiki/List_of_current_NCAA_Division_I_FBS_football_coaches",
   "coaches": {
-    "Deion Sanders": { "wins": 16, "losses": 21 },
-    "Kirk Ferentz": { "wins": 213, "losses": 128 },
-    "Mario Cristobal": { "wins": 97, "losses": 79 },
-    "Bill Belichick": { "wins": 4, "losses": 8 },
-    "Neal Brown": { "wins": 72, "losses": 51 },
-    "Blake Anderson": { "wins": 74, "losses": 54, "confChampWins": 3 },
-    "Bronco Mendenhall": { "wins": 146, "losses": 95 }
+    "Deion Sanders": { "wins": 16, "losses": 21, "age": 59, "seasonsWithTeam": 3 },
+    "Kirk Ferentz": { "wins": 213, "losses": 128, "age": 71, "seasonsWithTeam": 27 },
+    "Mario Cristobal": { "wins": 97, "losses": 79, "age": 55, "seasonsWithTeam": 4 },
+    "Bill Belichick": { "wins": 4, "losses": 8, "age": 74, "seasonsWithTeam": 1 },
+    "Neal Brown": { "wins": 72, "losses": 51, "age": 46, "seasonsWithTeam": 0 },
+    "Blake Anderson": { "wins": 74, "losses": 54, "confChampWins": 3, "age": 57, "seasonsWithTeam": 0 },
+    "Bronco Mendenhall": { "wins": 146, "losses": 95, "age": 60, "seasonsWithTeam": 1 }
   }
 }

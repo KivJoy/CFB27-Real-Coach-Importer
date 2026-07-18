@@ -48,16 +48,17 @@ Documents), lists your dynasty saves, and lets you pick one by number.
 
 ## What it does
 
-1. Reads every FBS head coach in the save.
-2. Compares each to who should be coaching that school.
-3. For any coach that's generic/wrong **and** has a real likeness in the game,
+1. Checks the save's head coach at each of the seven known teams (below) against
+   who's really coaching there.
+2. For any of those seven that's generic/wrong **and** has a real likeness in the game,
    sets the correct name + face.
-4. For those corrected coaches only, writes their real **career record**
-   (wins/losses, bowls, conference titles, national titles) — because a replaced
-   generic inherited the placeholder's empty `0-0` record. Coaches EA already
-   ships correctly are **left untouched**; the game already gives them their real
-   career stats, so there's nothing to fix.
-5. Saves everything to a **new copy** named `<yoursave>-REALCOACHES`. Your
+3. For those corrected coaches only, writes their real **age**, **seasons with
+   team**, and **career record** (wins/losses, bowls, conference titles, national
+   titles) — because a replaced generic inherited the placeholder's made-up
+   age/tenure and empty `0-0` record. Coaches EA already ships correctly are
+   **left untouched**; the game already gives them their real data, so there's
+   nothing to fix.
+4. Saves everything to a **new copy** named `<yoursave>-REALCOACHES`. Your
    original save is never touched — load the copy in the game.
 
 The game **schema is auto-selected** from each save (falling back to the newest
@@ -70,15 +71,15 @@ EA ships a fresh CFB27 roster with real, correct coaches for almost every FBS
 team already — the tool only needs to *replace* the handful shipped as generic
 placeholders. This is the full list of that correction:
 
-| Team | Placeholder replaced with | Real likeness | Career record |
-|---|---|---|---|
-| Colorado | Deion Sanders | Yes | 16–21 |
-| Iowa | Kirk Ferentz | Yes | 213–128 |
-| Miami | Mario Cristobal | Yes | 97–79 |
-| North Carolina | Bill Belichick | Yes | 4–8 (college only) |
-| North Texas | Neal Brown | No — no shipped likeness, name only | 72–51 |
-| Southern Miss | Blake Anderson | Yes | 74–54 |
-| Utah State | Bronco Mendenhall | Yes | 146–95 |
+| Team | Placeholder replaced with | Real likeness | Age | Seasons w/ team | Career record |
+|---|---|---|---|---|---|
+| Colorado | Deion Sanders | Yes | 59 | 3 | 16–21 |
+| Iowa | Kirk Ferentz | Yes | 71 | 27 | 213–128 |
+| Miami | Mario Cristobal | Yes | 55 | 4 | 97–79 |
+| North Carolina | Bill Belichick | Yes | 74 | 1 | 4–8 (college only) |
+| North Texas | Neal Brown | No — no shipped likeness, name only | 46 | 0 | 72–51 |
+| Southern Miss | Blake Anderson | Yes | 57 | 0 | 74–54 |
+| Utah State | Bronco Mendenhall | Yes | 60 | 1 | 146–95 |
 
 These seven are the only coaches ever changed. Everyone else on the roster is
 already correct as EA shipped them — name, face, and career stats — and is left

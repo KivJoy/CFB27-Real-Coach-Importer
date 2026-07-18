@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Real Coaches — correct a CFB27 dynasty save's generic head coaches to their
-// real-life identities: name + shipped likeness (portrait + 3D head recipe). A
-// corrected coach also gets their real historic career record written, because a
-// replaced generic inherited the placeholder's empty 0-0 stat slot. Coaches EA
+// real-life identities: name + shipped likeness (portrait + 3D head recipe) +
+// real age + real seasons-at-this-school. A corrected coach also gets their real
+// historic career record written, because a replaced generic inherited the
+// placeholder's empty 0-0 stat slot. Coaches EA
 // already ships correctly are left ALONE — their stat slot already holds EA's real
 // career record, so we never overwrite it. Writes to a SIBLING COPY
 // (<save>-REALCOACHES); the source is never touched. Tables resolved by stable
@@ -112,6 +113,9 @@ async function main() {
   const careerStatsTable = file.getTableByUniqueId(CAREER_COACH_STATS_UID);
   const statRange = {};
   for (const attr of careerStatsTable.schema.attributes) statRange[attr.name] = { min: attr.minValue, max: attr.maxValue };
+  // Age/SeasonsWithTeam live on the Coach record itself, not CareerCoachStats.
+  const coachRange = {};
+  for (const attr of coachTable.schema.attributes) coachRange[attr.name] = { min: attr.minValue, max: attr.maxValue };
 
   const plan = [];
   const skipped = [];
@@ -206,6 +210,16 @@ async function main() {
         p.rec.Portrait = d.asset.portrait;
         p.rec.IsNIL = d.asset.isNIL !== false;
         p.rec.Portrait_Force_Silhouette = false;
+      }
+      if (d.age != null) {
+        const r = coachRange.Age || { min: 0, max: 127 };
+        const val = clamp(d.age, r.min, r.max);
+        if (val != null) p.rec.Age = val;
+      }
+      if (d.seasonsWithTeam != null) {
+        const r = coachRange.SeasonsWithTeam || { min: 0, max: 127 };
+        const val = clamp(d.seasonsWithTeam, r.min, r.max);
+        if (val != null) p.rec.SeasonsWithTeam = val;
       }
       idCount++;
     }
