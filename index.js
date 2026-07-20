@@ -7,8 +7,9 @@
 // already ships correctly are left ALONE — their stat slot already holds EA's real
 // career record, so we never overwrite it. Writes to a SIBLING COPY
 // (<save>-REALCOACHES); the source is never touched. Tables resolved by stable
-// uniqueId only (CLAUDE.md §3); the CareerCoachStats row is reached by following
-// Coach.CareerStats and verifying the target's uniqueId.
+// uniqueId only (see ../CFB27-Modding-Knowledge/knowledge/save-format/table-resolution.md);
+// the CareerCoachStats row is reached by following Coach.CareerStats and verifying
+// the target's uniqueId.
 //
 // Safety: by default every generic coach is corrected, INCLUDING the one you
 // control (name + face + real record). Pass --skip-my-coach to leave your own coach

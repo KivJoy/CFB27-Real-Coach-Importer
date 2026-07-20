@@ -1,7 +1,9 @@
 // CFB27 franchise-save opener for the Real Coaches tool.
-// Vendored from test/src/openSave.js (schema 809_0). Tables are resolved ONLY by
-// stable uniqueId (see /CLAUDE.md §3) — display names are not unique and tableId
-// shifts between saves. The bootstrap-only name lookup is deliberately omitted here.
+// Vendored from the CFB27-Dynasty-Engine project's test/src/openSave.js. Tables are
+// resolved ONLY by stable uniqueId — see the canonical rule at
+// ../CFB27-Modding-Knowledge/knowledge/save-format/table-resolution.md — display
+// names are not unique and tableId shifts between saves. The bootstrap-only name
+// lookup is deliberately omitted here.
 const path = require('path');
 const { FranchiseFile } = require('madden-franchise');
 
@@ -11,7 +13,8 @@ const SCHEMA_DIR = process.env.RG_SCHEMA_DIR || path.resolve(__dirname, 'schema'
 /**
  * Choose a schema file for a save. Prefer an exact version match
  * (CFB27_<major>_<minor>.gz or C27_<major>_<minor>.gz); otherwise fall back to the
- * newest schema in the folder.
+ * newest schema in the folder, preferring the CFB27_* naming (full merged schema)
+ * over C27_* by prefix before breaking ties by modification time.
  *
  * A save's reported version (e.g. 814) is a build number that bumps with every game
  * patch, but the CFB27 table layouts this tool reads/writes are stable across those
@@ -31,12 +34,15 @@ function schemaFileFor(meta) {
   let files = [];
   try { files = fs.readdirSync(SCHEMA_DIR).filter((f) => /\.gz$/i.test(f)); } catch {}
   if (files.length) {
-    // Newest by modification time — dropping a fresh schema into the folder makes it
-    // the one used for any save whose exact version isn't bundled.
-    const newest = files
+    // Prefer CFB27_* (the full merged schema) over C27_* (older/partial naming) by
+    // prefix, then newest by modification time within that group — mtime alone isn't
+    // reliable (a git checkout or zip re-extract can reorder timestamps).
+    const pick = (pattern) => files
+      .filter((f) => pattern.test(f))
       .map((f) => ({ f, t: fs.statSync(path.join(SCHEMA_DIR, f)).mtimeMs }))
-      .sort((a, b) => b.t - a.t)[0].f;
-    return { path: path.join(SCHEMA_DIR, newest), exact: false, name: newest };
+      .sort((a, b) => b.t - a.t)[0];
+    const newest = pick(/^CFB27_/) || pick(/^C27_/) || pick(/./);
+    return { path: path.join(SCHEMA_DIR, newest.f), exact: false, name: newest.f };
   }
   throw new Error(
     `No schema files found in "${SCHEMA_DIR}".\n`
@@ -70,8 +76,10 @@ function openSave(savePath, { autoUnempty = false, onSchema } = {}) {
   });
 }
 
-// Confirmed against DYNASTY-BASELINE / DYNASTY-REALCOACHES with schema 809_0.
-// uniqueId is stable across schema versions; see docs/reference/TABLES.md.
+// Confirmed against DYNASTY-BASELINE / DYNASTY-REALCOACHES. uniqueId is stable
+// across schema versions; see ../CFB27-Dynasty-Engine/docs/reference/TABLES.md
+// (or the canonical rule at
+// ../CFB27-Modding-Knowledge/knowledge/save-format/table-resolution.md).
 const TABLE_UNIQUE_ID = {
   team: 3359508968, // per-school Team table (DisplayName/TeamIndex). NOT 431958913 (singleton).
   coach: 1860529246,
